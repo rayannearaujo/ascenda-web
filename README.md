@@ -1,16 +1,84 @@
-# React + Vite
+# Ascenda Web — High-Converting Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A modern, performance-focused landing page built with React and Vite — designed to convert visitors into clients for a web design studio.
 
-Currently, two official plugins are available:
+🔗 **Live site:** [ascendaweb.vercel.app](https://ascendaweb.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| | |
+|---|---|
+| **Type** | Business landing page |
+| **Role** | UI Design + Frontend Development |
+| **Stack** | React, Vite, CSS |
+| **Deploy** | Vercel |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## About the project
+
+Ascenda Web is the landing page for a web design and development studio focused on premium digital experiences.
+
+The page was designed and built with conversion in mind — clear value proposition, structured sections, and a layout that guides the visitor toward taking action.
+
+### Goals
+- Communicate services clearly and professionally
+- Reflect a premium visual identity
+- Perform well on both desktop and mobile
+- Be fast and lightweight (built with Vite)
+
+---
+
+## Features
+
+- Responsive layout — mobile-first approach
+- Clean component structure with React
+- Optimized images and assets
+- Fast load time via Vite build
+- CRO-focused layout and copywriting
+
+---
+
+## Tech Stack
+
+- **React** — component-based UI
+- **Vite** — fast dev environment and optimized build
+- **CSS** — custom styling, no heavy frameworks
+- **Vercel** — deployment and hosting
+
+---
+
+## Running locally
+
+```bash
+# Clone the repo
+git clone https://github.com/rayannearaujo/ascenda-web.git
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+```
+
+---
+
+## Project structure
+
+```
+/
+├── public/
+│   └── images/
+├── src/
+│   ├── components/
+│   ├── assets/
+│   └── App.jsx
+├── index.html
+└── vite.config.js
+```
+
+---
+
+*Designed and developed by [Rayanne Araújo](https://github.com/rayannearaujo)*
