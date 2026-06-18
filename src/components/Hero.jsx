@@ -57,7 +57,7 @@ export default function Hero() {
           </div>
 
           <h1 className="hero-premium__title">
-            Landing pages para infoprodutores que querem <em>lançar e vender mais.</em>
+            Landing pages & Sites para <em>focados em conversão para negócios </em>
           </h1>
 
           <p className="hero-premium__subtitle">
