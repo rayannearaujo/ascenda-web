@@ -61,7 +61,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero-premium__subtitle">
-            Páginas que já ajudaram experts a <b>vender mais de 6 dígitos</b> em lançamentos.
+            Criamos páginas com estratégicas de  <b>vendas</b>.
           </p>
 
           <ul className="hero-premium__bullets">
