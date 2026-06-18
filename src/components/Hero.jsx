@@ -57,7 +57,7 @@ export default function Hero() {
           </div>
 
           <h1 className="hero-premium__title">
-            Landing pages & Sites<em>focados em conversão. </em>
+            Landing pages & Sites <em>focados em conversão. </em>
           </h1>
 
           <p className="hero-premium__subtitle">
