@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orçamento • Karine — Ascenda Web</title>
+<meta name="description" content="Orçamento personalizado para Karine — Identidade Visual Completa, papelaria e Site One Page">
+<style>
+  :root{
+    --bg:#070a12;
+    --bg-card:#0e1220;
+    --bg-card-hover:#131a2c;
+    --border:#1c2436;
+    --border-hover:#2c374e;
+    --accent:#22539d;
+    --accent-soft:rgba(34,83,157,0.16);
+    --accent-text:#3c85fb;
+    --accent2:#22c55e;
+    --text:#f2f4fa;
+    --text-dim:#99a2b8;
+    --text-faint:#666f85;
+    --green:#3ddc97;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 550px at 15% -8%, rgba(34,83,157,0.14), transparent 60%),
+      radial-gradient(ellipse 650px 450px at 95% 8%, rgba(34,197,94,0.10), transparent 60%),
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+      var(--bg);
+    background-size:auto, auto, 56px 56px, 56px 56px, auto;
+    color:var(--text);
+    font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Inter, Roboto, sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    padding:0 20px 60px;
+  }
+  .wrap{max-width:880px;margin:0 auto;}
+
+  /* Header */
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:32px 0 24px;
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.5px;
+  }
+  .brand .logo-icon{
+    height:38px;
+    width:38px;
+    display:block;
+    flex-shrink:0;
+  }
+  .brand-sub{color:var(--text-faint);font-size:12.5px;font-weight:400;margin-top:1px;}
+  .combo-banner{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--accent-soft);
+    border:1px solid rgba(34,83,157,0.3);
+    border-radius:12px;
+    padding:12px 16px;
+    font-size:13.5px;
+    color:var(--text-dim);
+    margin-top:28px;
+  }
+  .combo-banner strong{color:var(--accent-text);font-weight:600;}
+  .doc-meta{text-align:right;font-size:13px;color:var(--text-faint);}
+
+  /* Hero */
+  .hero{padding:56px 0 40px;}
+  .kicker{
+    display:inline-block;
+    font-size:12.5px;
+    color:var(--accent-text);
+    background:var(--accent-soft);
+    border:1px solid rgba(34,83,157,0.3);
+    padding:5px 14px;
+    border-radius:100px;
+    margin-bottom:20px;
+    letter-spacing:0.4px;
+  }
+  h1{
+    font-size:38px;
+    font-weight:700;
+    line-height:1.2;
+    letter-spacing:-0.5px;
+  }
+  h1 span{
+    background:linear-gradient(90deg, var(--accent-text), var(--accent2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p{
+    margin-top:16px;
+    color:var(--text-dim);
+    font-size:16px;
+    max-width:600px;
+  }
+
+  /* Section titles */
+  .section-title{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--text-faint);
+    margin:48px 0 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+
+  /* Cards */
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:26px 28px;
+    margin-bottom:16px;
+    transition:border-color .2s ease, background .2s ease, transform .15s ease;
+    position:relative;
+  }
+  .card:hover{border-color:var(--border-hover);background:var(--bg-card-hover);}
+  .card.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 8px 24px -8px rgba(34,83,157,0.35);}
+
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    cursor:pointer;
+  }
+  .card-left{display:flex;gap:16px;align-items:flex-start;}
+
+  .checkbox{
+    width:22px;height:22px;
+    border-radius:7px;
+    border:2px solid var(--border-hover);
+    flex-shrink:0;
+    margin-top:3px;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .15s ease;
+  }
+  .checkbox svg{opacity:0;transition:opacity .15s ease;width:13px;height:13px;}
+  .card.selected .checkbox{background:var(--accent-text);border-color:var(--accent-text);}
+  .card.selected .checkbox svg{opacity:1;}
+
+  .card-title{font-size:17px;font-weight:600;}
+  .badge{
+    display:inline-block;
+    font-size:11px;
+    font-weight:600;
+    padding:3px 9px;
+    border-radius:100px;
+    margin-left:10px;
+    vertical-align:middle;
+    letter-spacing:0.3px;
+  }
+  .badge.opcional{background:rgba(255,159,67,0.14);color:#ffb066;border:1px solid rgba(255,159,67,0.3);}
+  .badge.core{background:rgba(61,220,151,0.14);color:var(--green);border:1px solid rgba(61,220,151,0.3);}
+
+  .card-desc{color:var(--text-dim);font-size:14.5px;margin-top:6px;max-width:480px;}
+
+  .card-price{
+    font-size:22px;
+    font-weight:700;
+    white-space:nowrap;
+    text-align:right;
+  }
+  .card-price small{display:block;font-size:11px;font-weight:400;color:var(--text-faint);margin-top:2px;}
+
+  ul.features{
+    list-style:none;
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--border);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 20px;
+  }
+  ul.features li{
+    font-size:13.5px;
+    color:var(--text-dim);
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  ul.features li::before{
+    content:"—";
+    color:var(--accent);
+    flex-shrink:0;
+  }
+
+  /* Summary */
+  .summary{
+    background:linear-gradient(145deg, #101a30, #0b1220);
+    border:1px solid rgba(34,83,157,0.35);
+    border-radius:18px;
+    padding:28px 30px;
+    margin-top:36px;
+  }
+  .summary-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:14.5px;
+    color:var(--text-dim);
+    padding:7px 0;
+  }
+  .summary-row.total{
+    border-top:1px solid rgba(34,83,157,0.3);
+    margin-top:10px;
+    padding-top:16px;
+    font-size:20px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .summary-row.total span:last-child{color:var(--accent-text);}
+  .summary-note{font-size:12.5px;color:var(--text-faint);margin-top:10px;}
+
+  /* CTA */
+  .cta{
+    display:flex;
+    gap:14px;
+    margin-top:26px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    flex:1;
+    min-width:200px;
+    text-align:center;
+    padding:15px 22px;
+    border-radius:12px;
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    transition:transform .15s ease, opacity .15s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(90deg, #22c55e, #16a34a);color:#fff;box-shadow:0 8px 20px -8px rgba(34,197,94,0.5);}
+  .btn-secondary{background:transparent;border:1px solid var(--border-hover);color:var(--text);}
+
+  /* Footer / conditions */
+  .conditions{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);}
+  .conditions h3{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-faint);margin-bottom:14px;}
+  .conditions ol{padding-left:18px;color:var(--text-dim);font-size:13.5px;}
+  .conditions li{margin-bottom:6px;}
+
+  footer{
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    font-size:13px;
+    color:var(--text-faint);
+  }
+  footer a{color:var(--text-dim);text-decoration:none;}
+  footer a:hover{color:var(--accent-text);}
+  .footer-contacts{display:flex;flex-direction:column;gap:4px;}
+
+  @media (max-width:560px){
+    h1{font-size:28px;}
+    .card-top{flex-direction:column;}
+    .card-price{text-align:left;}
+    ul.features{grid-template-columns:1fr;}
+    .doc-meta{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="100" x2="100" y2="0">
+            <stop offset="0" style="stop-color:var(--accent)"/>
+            <stop offset="1" style="stop-color:var(--accent2)"/>
+          </linearGradient>
+        </defs>
+        <path d="M8,88 Q50,8 92,88" stroke="url(#logoGrad)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M20,88 Q50,28 80,88" stroke="url(#logoGrad)" stroke-width="6" stroke-linecap="round" opacity="0.78"/>
+        <path d="M30,88 Q50,44 70,88" stroke="url(#logoGrad)" stroke-width="6" stroke-linecap="round" opacity="0.56"/>
+        <path d="M38,88 Q50,58 62,88" stroke="url(#logoGrad)" stroke-width="6" stroke-linecap="round" opacity="0.36"/>
+      </svg>
+      <div>
+        ASCENDA WEB
+        <div class="brand-sub">Design e tecnologia para marcas que querem crescer</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      Orçamento Nº 2026-07<br>
+      Emitido em 10 de julho de 2026
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="kicker">Proposta comercial personalizada</span>
+    <h1>Orçamento para <span>Karine</span></h1>
+    <p>Preparamos um pacote completo para lançar sua marca: identidade visual — logo, papelaria e materiais gráficos — e um site profissional. Marque os itens desejados abaixo para simular seu investimento.</p>
+  </section>
+
+  <div class="combo-banner">🎉 <span><strong>Pacote completo:</strong> contratando Identidade Visual + Site juntos, você ganha 10% de desconto automático.</span></div>
+
+  <div class="section-title">Serviços</div>
+
+  <div class="card selected" id="card-identidade" data-price="1500" onclick="toggleCard(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <span class="card-title">Identidade Visual Completa<span class="badge core">Recomendado</span></span>
+          <p class="card-desc">A base da sua marca: logotipo, cores, tipografia, papelaria e materiais gráficos — prontos para uso físico e digital.</p>
+        </div>
+      </div>
+      <div class="card-price">R$ 1.500<small>pagamento único</small></div>
+    </div>
+    <ul class="features">
+      <li>Logotipo (versões principal, ícone e monocromática)</li>
+      <li>Paleta de cores e tipografia oficial</li>
+      <li>Cartão de visita (versão física e digital)</li>
+      <li>Arte para pastas e folders</li>
+      <li>Aplicação em materiais de escritório (papelaria)</li>
+      <li>Manual de marca em PDF</li>
+    </ul>
+  </div>
+
+  <div class="card selected" id="card-site" data-price="1800" onclick="toggleCard(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <span class="card-title">Site One Page</span>
+          <p class="card-desc">Um site de página única, responsivo e otimizado para apresentar sua marca e converter visitantes.</p>
+        </div>
+      </div>
+      <div class="card-price">R$ 1.800<small>pagamento único</small></div>
+    </div>
+    <ul class="features">
+      <li>Design responsivo (celular, tablet e desktop)</li>
+      <li>Seções: Início, Sobre, Serviços, Contato</li>
+      <li>Formulário / links de contato integrados</li>
+      <li>Publicação inclusa (domínio à parte)</li>
+    </ul>
+  </div>
+
+  <div class="card" id="card-marca" data-price="800" onclick="toggleCard(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <span class="card-title">Registro de Marca<span class="badge opcional">Opcional</span></span>
+          <p class="card-desc">Proteja legalmente o nome e o logotipo da sua marca junto ao INPI, evitando o uso por terceiros.</p>
+        </div>
+      </div>
+      <div class="card-price">+ R$ 800<small>pagamento único</small></div>
+    </div>
+    <ul class="features">
+      <li>Pesquisa prévia de viabilidade</li>
+      <li>Preparação e protocolo do pedido</li>
+      <li>Acompanhamento do processo junto ao INPI</li>
+      <li>Orientação sobre classes de registro</li>
+    </ul>
+  </div>
+
+  <div class="summary">
+    <div class="summary-row"><span>Itens selecionados</span><span id="itemCount">3 de 3</span></div>
+    <div class="summary-row" id="discountRow" style="display:none;"><span>🎉 Desconto pacote (Identidade + Site)</span><span id="discountAmount" style="color:var(--accent2);font-weight:600;">- R$ 300</span></div>
+    <div class="summary-row total"><span>Investimento total</span><span id="totalPrice">R$ 2.970</span></div>
+    <div class="summary-note">Valores em Real (BRL). Orçamento válido por 15 dias a partir da data de emissão. Materiais gráficos entregues como arte digital pronta para impressão (impressão física não inclusa).</div>
+  </div>
+
+  <div class="cta">
+    <a class="btn btn-primary" id="waLink" href="#" target="_blank" rel="noopener">Aprovar pelo WhatsApp (Brasil)</a>
+    <a class="btn btn-secondary" href="mailto:hello@ascendaweb.com?subject=Aprova%C3%A7%C3%A3o%20de%20or%C3%A7amento%20-%20Karine">Aprovar por e-mail</a>
+  </div>
+
+  <div class="conditions">
+    <h3>Condições</h3>
+    <ol>
+      <li>Início do projeto mediante confirmação e pagamento de 50% de entrada.</li>
+      <li>Prazo estimado: 7 a 10 dias úteis para identidade visual e site (após envio de conteúdo/imagens pela cliente).</li>
+      <li>Registro de marca (INPI) possui prazo próprio de análise, fora do controle da Ascenda Web.</li>
+      <li>Até 2 rodadas de ajustes inclusas em cada entrega.</li>
+    </ol>
+  </div>
+
+  <footer>
+    <div class="footer-contacts">
+      <span>Ascenda Web</span>
+      <a href="mailto:hello@ascendaweb.com">hello@ascendaweb.com</a>
+      <a href="https://wa.me/5585997712771" target="_blank" rel="noopener">WhatsApp Brasil +55 85 99771-2771</a>
+      <a href="https://wa.me/353838424835" target="_blank" rel="noopener">WhatsApp Irlanda +353 83 842 4835</a>
+    </div>
+    <div>Proposta gerada para Karine · 10/07/2026</div>
+  </footer>
+
+</div>
+
+<script>
+  function formatBRL(n){
+    return n.toLocaleString('pt-BR', {style:'currency', currency:'BRL', minimumFractionDigits: n % 1 === 0 ? 0 : 2});
+  }
+
+  const COMBO_DISCOUNT_RATE = 0.10;
+
+  function updateSummary(){
+    const cards = document.querySelectorAll('.card');
+    const idCard = document.getElementById('card-identidade');
+    const siteCard = document.getElementById('card-site');
+    let total = 0, selected = 0;
+    cards.forEach(c => { if(c.classList.contains('selected')) { total += parseInt(c.dataset.price, 10); selected++; } });
+
+    const comboApplied = idCard.classList.contains('selected') && siteCard.classList.contains('selected');
+    let discount = 0;
+    if(comboApplied){
+      discount = Math.round((parseInt(idCard.dataset.price,10) + parseInt(siteCard.dataset.price,10)) * COMBO_DISCOUNT_RATE);
+      total -= discount;
+    }
+
+    document.getElementById('totalPrice').textContent = formatBRL(total);
+    document.getElementById('itemCount').textContent = selected + ' de ' + cards.length;
+
+    const discountRow = document.getElementById('discountRow');
+    discountRow.style.display = comboApplied ? 'flex' : 'none';
+    if(comboApplied){
+      document.getElementById('discountAmount').textContent = '- ' + formatBRL(discount);
+    }
+
+    const waMsg = encodeURIComponent(
+      `Olá! Sou a Karine. Quero aprovar o orçamento (Nº 2026-07) no valor de ${formatBRL(total)}, com ${selected} item(ns) selecionado(s).`
+    );
+    document.getElementById('waLink').href = `https://wa.me/5585997712771?text=${waMsg}`;
+  }
+
+  function toggleCard(el){
+    el.classList.toggle('selected');
+    updateSummary();
+  }
+
+  updateSummary();
+</script>
+
+</body>
+</html>
