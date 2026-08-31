@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orçamento • Joel Flats — Ascenda Web</title>
+<style>
+  :root{
+    --bg:#070A12;
+    --card:#0E1220;
+    --card-border:#1C2436;
+    --card-border-selected:#22539D;
+    --text:#F2F4FA;
+    --text-soft:#9AA3B8;
+    --text-mute:#6C7690;
+    --blue:#3C85FB;
+    --blue-soft:rgba(60,133,251,0.12);
+    --blue-border:rgba(60,133,251,0.3);
+    --green:#22C55E;
+    --green-dark:#16A34A;
+    --badge-green-bg:rgba(61,220,151,0.14);
+    --badge-green-text:#3DDC97;
+    --badge-green-border:rgba(61,220,151,0.3);
+    --badge-amber-text:#F0A93E;
+    --badge-amber-border:rgba(240,169,62,0.3);
+    --divider:#1C2436;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      linear-gradient(var(--bg),var(--bg)),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 40px);
+    color:var(--text);
+    font-family:"Segoe UI", -apple-system, system-ui, Inter, Roboto, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:56px 24px 90px;}
+
+  .header{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    flex-wrap:wrap;gap:16px;
+    padding-bottom:24px;
+    border-bottom:1px solid var(--divider);
+    margin-bottom:36px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-name{font-size:17px;font-weight:700;letter-spacing:0.02em;}
+  .brand-tag{font-size:13px;color:var(--text-soft);margin-top:2px;}
+  .meta{text-align:right;font-size:13px;color:var(--text-soft);}
+  .meta div{margin-bottom:2px;}
+
+  .pill{
+    display:inline-block;
+    font-size:13px;
+    color:#9CB9FF;
+    background:var(--blue-soft);
+    border:1px solid var(--blue-border);
+    padding:6px 14px;
+    border-radius:100px;
+    margin-bottom:22px;
+  }
+
+  h1{
+    font-size:38px;
+    font-weight:700;
+    line-height:1.2;
+    margin:0 0 18px;
+  }
+  h1 span{
+    background-image:linear-gradient(90deg, var(--blue), var(--green));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .intro{font-size:16px;color:var(--text-soft);max-width:58ch;margin-bottom:36px;}
+
+  .section-label{
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--text-mute);
+    margin:0 0 16px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--divider);
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:26px 28px;
+    margin-bottom:16px;
+  }
+  .card.selected{
+    border-color:var(--card-border-selected);
+    box-shadow:0 0 0 1px var(--card-border-selected), 0 8px 24px -8px rgba(34,83,157,0.35);
+  }
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .card-left{display:flex;align-items:flex-start;gap:14px;flex:1;min-width:220px;}
+  .checkbox{
+    flex:none;width:22px;height:22px;margin-top:2px;
+    border-radius:7px;
+    border:2px solid #2C374E;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .checkbox.locked{cursor:default;}
+  .checkbox svg{width:12px;height:12px;display:none;}
+  .checkbox.checked{background:var(--blue);border-color:var(--blue);}
+  .checkbox.checked svg{display:block;}
+
+  .card-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .card-title{font-size:19px;font-weight:600;}
+  .badge{
+    font-size:11px;font-weight:600;
+    padding:3px 9px;border-radius:100px;
+  }
+  .badge.core{background:var(--badge-green-bg);color:var(--badge-green-text);border:1px solid var(--badge-green-border);}
+  .badge.optional{background:transparent;color:var(--badge-amber-text);border:1px solid var(--badge-amber-border);}
+  .card-desc{color:var(--text-soft);font-size:14.5px;max-width:50ch;}
+  .card-price{text-align:right;flex:none;}
+  .card-price .amount{font-size:24px;font-weight:700;}
+  .card-price .label{display:block;font-size:12px;color:var(--text-mute);margin-top:2px;}
+
+  .card-items{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;
+    margin-top:18px;padding-top:18px;border-top:1px solid var(--divider);
+  }
+  .card-items div{
+    font-size:14px;color:var(--text);padding-left:16px;position:relative;
+  }
+  .card-items div::before{content:"—";position:absolute;left:0;color:var(--text-mute);}
+
+  .summary{
+    background:var(--card);
+    border:1px solid var(--divider);
+    border-radius:16px;
+    padding:24px 28px;
+    margin-top:20px;
+  }
+  .summary-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text-soft);margin-bottom:14px;}
+  .summary-row .discount{color:var(--badge-green-text);font-weight:600;}
+  .summary-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;border-top:1px solid var(--divider);}
+  .summary-total .label{font-size:16px;font-weight:600;}
+  .summary-total .value{font-size:28px;font-weight:700;color:var(--blue);}
+  .fine{font-size:13px;color:var(--text-mute);margin:18px 0 32px;}
+
+  .actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
+  .btn{
+    flex:1;min-width:220px;
+    text-align:center;
+    padding:15px 22px;
+    border-radius:12px;
+    font-size:15px;font-weight:600;
+    text-decoration:none;
+    display:inline-block;
+    transition:opacity .15s ease, transform .15s ease;
+  }
+  .btn:hover{opacity:0.92;}
+  .btn-primary{
+    color:#fff;
+    background-image:linear-gradient(90deg, var(--green), var(--green-dark));
+    box-shadow:0 8px 20px -8px rgba(34,197,94,0.5);
+    border:none;
+  }
+  .btn-secondary{
+    color:var(--text);
+    background:transparent;
+    border:1px solid #2C374E;
+  }
+
+  .conditions h3{font-size:16px;font-weight:600;margin-bottom:14px;}
+  .conditions ol{margin:0;padding-left:20px;color:var(--text-soft);font-size:14px;}
+  .conditions li{margin-bottom:10px;}
+
+  footer{
+    margin-top:56px;padding-top:24px;
+    border-top:1px solid var(--divider);
+    font-size:13px;color:var(--text-soft);
+    display:flex;justify-content:space-between;align-items:flex-start;
+    flex-wrap:wrap;gap:12px;
+  }
+  footer .contact div{margin-bottom:4px;}
+  footer a{color:var(--text-soft);text-decoration:none;}
+  footer a:hover{color:var(--text);}
+  footer .stamp{color:var(--text-mute);font-size:12.5px;}
+
+  @media (max-width:560px){
+    .card-items{grid-template-columns:1fr;}
+    .card-top{flex-direction:column;}
+    .card-price{text-align:left;}
+    h1{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="brand">
+      <div>
+        <div class="brand-name">ASCENDA WEB</div>
+        <div class="brand-tag">Design e tecnologia para marcas que querem crescer</div>
+      </div>
+    </div>
+    <div class="meta">
+      <div>Orçamento Nº 2026-08</div>
+      <div>Emitido em 31 de agosto de 2026</div>
+    </div>
+  </div>
+
+  <span class="pill">Proposta comercial personalizada</span>
+
+  <h1>Orçamento para <span>Joel Flats</span></h1>
+  <p class="intro">Preparamos uma proposta para renovar a presença digital da Joel Flats: migração completa da hospedagem e tecnologia — do Wix para WordPress — com novo site, estrutura otimizada e melhor performance. Marque os itens desejados abaixo para simular seu investimento.</p>
+
+  <div class="section-label">SERVIÇOS</div>
+
+  <div class="card selected" id="card-site">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="checkbox checked locked">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#F2F4FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title-row">
+            <span class="card-title">Site Novo em WordPress</span>
+            <span class="badge core">Base do projeto</span>
+          </div>
+          <p class="card-desc">Recriação completa do site atual, migrando a hospedagem e a tecnologia do Wix para o WordPress — com novo design, estrutura otimizada e melhor performance de carregamento.</p>
+        </div>
+      </div>
+      <div class="card-price">
+        <span class="amount">R$ 1.800</span>
+        <span class="label">pagamento único</span>
+      </div>
+    </div>
+    <div class="card-items">
+      <div>Migração da hospedagem e tecnologia (Wix → WordPress)</div>
+      <div>Novo design responsivo (celular, tablet e desktop)</div>
+      <div>Páginas: Início, Nossos Flats, Sobre Nós, Contato</div>
+      <div>Integração com WhatsApp, Airbnb e Booking</div>
+      <div>Otimização de performance e SEO básico</div>
+      <div>Publicação inclusa (domínio e hospedagem à parte)</div>
+    </div>
+  </div>
+
+  <div class="card" id="card-blog">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="checkbox" id="check-blog" onclick="toggleBlog()">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#F2F4FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title-row">
+            <span class="card-title">Blog</span>
+            <span class="badge optional">Opcional</span>
+          </div>
+          <p class="card-desc">Adicione uma seção de blog ao site — ideal para publicar dicas de hospedagem e pontos turísticos de Brasília, atraindo mais visitantes pelo Google.</p>
+        </div>
+      </div>
+      <div class="card-price">
+        <span class="amount">+ R$ 600</span>
+        <span class="label">pagamento único</span>
+      </div>
+    </div>
+    <div class="card-items">
+      <div>Estrutura de blog integrada ao WordPress</div>
+      <div>Template de artigo otimizado para SEO</div>
+      <div>Categorias e sistema de tags</div>
+      <div>Treinamento rápido para publicação de posts</div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-row"><span>Itens selecionados</span><span id="count">1 de 2</span></div>
+    <div class="summary-total">
+      <span class="label">Investimento total</span>
+      <span class="value" id="total">R$ 1.800</span>
+    </div>
+  </div>
+
+  <p class="fine">Valores em Real (BRL). Orçamento válido por 15 dias a partir da data de emissão. Hospedagem e domínio não inclusos no valor.</p>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="https://wa.me/5585997712771?text=Ol%C3%A1!%20Quero%20aprovar%20o%20or%C3%A7amento%20da%20Joel%20Flats.">Aprovar pelo WhatsApp (Brasil)</a>
+    <a class="btn btn-secondary" href="mailto:hello@ascendaweb.com?subject=Aprova%C3%A7%C3%A3o%20de%20or%C3%A7amento%20-%20Joel%20Flats">Aprovar por e-mail</a>
+  </div>
+
+  <div class="conditions">
+    <h3>Condições</h3>
+    <ol>
+      <li>Início do projeto mediante confirmação e pagamento de 50% de entrada.</li>
+      <li>Prazo estimado: 10 a 15 dias úteis (após envio de conteúdo/imagens e acesso à hospedagem atual).</li>
+      <li>Migração de domínio e DNS pode levar até 48h para propagação completa.</li>
+      <li>Até 2 rodadas de ajustes inclusas na entrega.</li>
+    </ol>
+  </div>
+
+  <footer>
+    <div class="contact">
+      <div>Ascenda Web &lt;hello@ascendaweb.com&gt;</div>
+      <div><a href="https://wa.me/5585997712771">WhatsApp Brasil +55 85 99771-2771</a></div>
+      <div><a href="https://wa.me/353838424835">WhatsApp Irlanda +353 83 842 4835</a></div>
+    </div>
+    <div class="stamp">Proposta gerada para Joel Flats · 31/08/2026</div>
+  </footer>
+
+</div>
+
+<script>
+  let blogSelected = false;
+  const basePrice = 1800;
+  const blogPrice = 600;
+
+  function formatBRL(n){
+    return 'R$ ' + n.toLocaleString('pt-BR');
+  }
+
+  function toggleBlog(){
+    blogSelected = !blogSelected;
+    document.getElementById('card-blog').classList.toggle('selected', blogSelected);
+    document.getElementById('check-blog').classList.toggle('checked', blogSelected);
+    update();
+  }
+
+  function update(){
+    const total = basePrice + (blogSelected ? blogPrice : 0);
+    document.getElementById('total').textContent = formatBRL(total);
+    document.getElementById('count').textContent = (blogSelected ? '2' : '1') + ' de 2';
+  }
+
+  update();
+</script>
+
+</body>
+</html>
